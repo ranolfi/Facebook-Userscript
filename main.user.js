@@ -26,25 +26,28 @@ if (currentUrl['href'] === currentUrl['origin'] + '/') {
     window.location.replace(feedUrl);
 }
 
-let idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
-idx.forEach(x => {
+let feedOptions = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
+feedOptions.forEach(x => {
     if (currentUrl['search'].includes(x)) {
         window.location.replace(feedUrl);
     }
 });
 
-let element = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a");
-element.forEach(x => x.addEventListener('click', () => {
+let homeLinks = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a"); // hardcoded identifiers may not work in the future
+homeLinks.forEach(x => x.addEventListener('click', () => {
     window.location.replace(feedUrl);
 }), false);
 
 
 // ### Groups ###
-let group = document.querySelectorAll("[data-type='type_group'] > a");
-let groupPop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
-group.forEach(x => x.addEventListener('click', () => {
-    x = x.getAttribute('href');
-    window.location.replace(groupSec(x, groupPop[0]));
+let groupLinks = document.querySelectorAll("[data-type='type_group'] > a");
+
+let groupSortOptions = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
+// TODO: groupSortBy
+
+groupLinks.forEach(x => x.addEventListener('click', () => {
+    x = x.getAttribute('href'); // TODO
+    window.location.replace(groupSec(x, groupSortOptions[0]));
 }, false));
 
 if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
@@ -52,9 +55,9 @@ if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('perm
 
     let groupRef = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
-    if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupPop[0]) {
+    if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupSortOptions[0]) {
         let groupId = document.querySelectorAll("[property='al:android:url']");
-        window.location.replace(sortGroup(groupId, 'content', groupPop[0], currentUrl['origin'] + '/'));
+        window.location.replace(sortGroup(groupId, 'content', groupSortOptions[0], currentUrl['origin'] + '/'));
     }
 }
 
@@ -64,7 +67,7 @@ if (groupDisc[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
     if (! abpg.includes('tab_about')) {
-        groupDisc[1].addEventListener('click', () => { window.location.replace(sortGroup(groupId, 'content', groupPop[0], currentUrl['origin'] + '/')) }, false);
+        groupDisc[1].addEventListener('click', () => { window.location.replace(sortGroup(groupId, 'content', groupSortOptions[0], currentUrl['origin'] + '/')) }, false);
     }
 }
 
