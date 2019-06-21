@@ -43,20 +43,21 @@ homeLinks.forEach(x => x.addEventListener('click', () => { // TODO: should chang
 let groupLinks = document.querySelectorAll("[data-type='type_group'] > a");
 
 let groupSortOptions = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
-let groupSortBy = groupSortOptions[0]; // TODO: update documentation to change here
+let groupSortBy = groupSortOptions[0]; // TODO: update README to change this line if needed
 
 groupLinks.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
     let groupUrl = x.getAttribute('href');
     window.location.replace(groupSec(groupUrl, groupSortBy));
 }, false));
 
+let groupId = document.querySelectorAll("[property='al:android:url']"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
+
 if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
     let splitUrl = currentUrl['href'].split('/');
 
     let groupRef = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
-    if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupSortBy) {
-        let groupId = document.querySelectorAll("[property='al:android:url']"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
+    if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupSortBy) {        
         window.location.replace(getGroupUrlWithSortParameter(groupId, 'content', groupSortBy, currentUrl['origin'] + '/'));
     }
 }
@@ -92,7 +93,7 @@ comtime.forEach(x => x.addEventListener('click', () => { // TODO: should change 
 // - sortBy = type of group disposition (CHRONOLOGICAL or RECENT_ACTIVITY)
 // - url = Facebook domain
 function getGroupUrlWithSortParameter(groupIdElement, groupIdAttributeName, sortBy, url) {
-    groupIdElementAttributeValue = groupIdElement[0].getAttribute(groupIdAttributeName);
+    groupIdElementAttributeValue = groupIdElement[0].getAttribute(groupIdAttributeName); // TODO: why is this done here? (shouldn't)
     let groupId = groupIdElementAttributeValue.split('/')[3];
     return url + 'groups/' + groupId + '/?sorting_setting=' + sortBy;
 }
