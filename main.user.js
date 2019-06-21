@@ -17,7 +17,8 @@
 // ==/UserScript==
 
 // ### Global vars ###
-let cur = new URL(window.location.href), spurl = cur['href'].split('/');
+let cur = new URL(window.location.href);
+let spurl = cur['href'].split('/');
 
 // ### Feed vars ###
 let fd = cur['origin'] + '?sk=h_chr';
