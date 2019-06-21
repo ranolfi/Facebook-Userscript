@@ -23,7 +23,7 @@ let currentUrl = new URL(window.location.href);
 let feedUrl = currentUrl['origin'] + '?sk=h_chr';
 
 if (currentUrl['href'] === currentUrl['origin'] + '/') {
-    window.location.replace(feedUrl);
+    window.location.replace(feedUrl); // TODO: allow manual override
 }
 
 let feedOptions = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
@@ -58,7 +58,7 @@ if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('perm
 
     let groupRefs = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
-    if (urlArg === '' || urlArg === null || urlArg === groupRefs[0] || urlArg === groupRefs[1] || urlArg === groupRefs[2] || urlArg === groupRefs[3] || urlArg === groupRefs[4] || urlArg !== '?sorting_setting=' + groupSortBy) {
+    if (! urlArg || groupRefs.includes(urlArg) || urlArg !== '?sorting_setting=' + groupSortBy) { // TODO: allow manual override
         window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl['origin'] + '/'));
     }
 }
