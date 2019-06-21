@@ -65,7 +65,7 @@ if (gdisc[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
     if (!abpg.includes('tab_about')) {
-        gdisc[1].addEventListener('click', () => { window.location.replace(sortGrp(grid, 'content', gpop[0], cur['origin'] + '/') }, false);
+        gdisc[1].addEventListener('click', () => { window.location.replace(sortGrp(grid, 'content', gpop[0], cur['origin'] + '/')) }, false);
     }
 }
 
