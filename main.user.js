@@ -54,10 +54,11 @@ let groupIdElement = document.querySelectorAll("[property='al:android:url']"); /
 
 if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
     let splitUrl = currentUrl['href'].split('/');
+    let urlArg = splitUrl[5];
 
     let groupRef = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
-    if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupSortBy) {
+    if (urlArg === '' || urlArg === null || urlArg === groupRef[0] || urlArg === groupRef[1] || urlArg === groupRef[2] || urlArg === groupRef[3] || urlArg === groupRef[4] || urlArg !== '?sorting_setting=' + groupSortBy) {
         window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl['origin'] + '/'));
     }
 }
