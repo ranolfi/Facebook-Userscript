@@ -33,8 +33,8 @@ feedOptions.forEach(x => {
     }
 });
 
-let homeLinks = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a"); // hardcoded identifiers may not work in the future
-homeLinks.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
+let homepageLinks = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a"); // fragile (hardcoded obfuscated identifiers may not work in the future)
+homepageLinks.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
     window.location.replace(feedUrl);
 }), false);
 
@@ -50,7 +50,7 @@ groupLinks.forEach(x => x.addEventListener('click', () => { // TODO: should chan
     window.location.replace(groupSec(groupUrl, groupSortBy));
 }, false));
 
-let groupId = document.querySelectorAll("[property='al:android:url']"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
+let groupIdElement = document.querySelectorAll("[property='al:android:url']"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
 
 if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
     let splitUrl = currentUrl['href'].split('/');
@@ -58,30 +58,31 @@ if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('perm
     let groupRef = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
     if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupSortBy) {        
-        window.location.replace(getGroupUrlWithSortParameter(groupId, 'content', groupSortBy, currentUrl['origin'] + '/'));
+        window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl['origin'] + '/'));
     }
 }
 
-// # Discussion link event #
-let groupDisc = document.querySelectorAll('._2yau');
-if (groupDisc[1] !== undefined) {
-    let abpg = document.querySelectorAll('._2yaa');
-    abpg = abpg[1].getAttribute('data-key');
+// # Discussion link #
+let groupDiscussionLinks = document.querySelectorAll('._2yau'); // fragile (hardcoded obfuscated identifiers may not work in the future)
+if (groupDiscussionLinks[1] !== undefined) {
+    let abpg = document.querySelectorAll('._2yaa'); // fragile (hardcoded obfuscated identifiers may not work in the future)
+    abpg = abpg[1].getAttribute('data-key'); // TODO: don't do this; also, find a more suitable name (WTH does 'abpg' mean?)
     if (! abpg.includes('tab_about')) {
-        groupDisc[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupId, 'content', groupSortBy, currentUrl['origin'] + '/')) }, false); // TODO: should change the href instead
+        groupDiscussionLinks[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl['origin'] + '/')) }, false); // TODO: should change the href instead
     }
 }
 
-// # 'post time' & 'comment time' link event #
-let postime = document.querySelectorAll('._5pcq');
-postime.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
-    x = x.getAttribute('href');
+// # 'post time' link #
+let postTimestampElement = document.querySelectorAll('._5pcq');
+postTimestampElement.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
+    x = x.getAttribute('href'); // TODO: don't do this
     window.location.replace(x);
 }, false));
 
-let comtime = document.querySelectorAll('._6qw7');
-comtime.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
-    x = x.getAttribute('href');
+// # 'comment time' link #
+let commentTimestampElement = document.querySelectorAll('._6qw7');
+commentTimestampElement.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
+    x = x.getAttribute('href'); // TODO: don't do this
     window.location.replace(x);
 }, false));
 
