@@ -95,7 +95,7 @@ commentTimestampElement.forEach(x => x.addEventListener('click', () => { // TODO
 // - sortBy = type of group disposition (CHRONOLOGICAL or RECENT_ACTIVITY)
 // - url = Facebook domain
 function getGroupUrlWithSortParameter(groupIdElement, groupIdAttributeName, sortBy, url) {
-    groupIdElementAttributeValue = groupIdElement[0].getAttribute(groupIdAttributeName); // TODO: why is this done here? (shouldn't)
+    let groupIdElementAttributeValue = groupIdElement[0].getAttribute(groupIdAttributeName); // TODO: why is this done here? (shouldn't)
     let groupId = groupIdElementAttributeValue.split('/')[3];
     return url + 'groups/' + groupId + '/?sorting_setting=' + sortBy;
 }
