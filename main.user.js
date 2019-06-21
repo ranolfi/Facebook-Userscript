@@ -17,54 +17,54 @@
 // ==/UserScript==
 
 // ### Global vars ###
-let current_url = new URL(window.location.href);
+let currentUrl = new URL(window.location.href);
 
 // ### Feed ###
-let feed = current_url['origin'] + '?sk=h_chr';
+let feedUrl = currentUrl['origin'] + '?sk=h_chr';
 
-if (current_url['href'] === current_url['origin'] + '/') {
-    window.location.replace(feed);
+if (currentUrl['href'] === currentUrl['origin'] + '/') {
+    window.location.replace(feedUrl);
 }
 
 let idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 idx.forEach(a => {
-    if (current_url['search'].includes(a)) {
-        window.location.replace(feed);
+    if (currentUrl['search'].includes(a)) {
+        window.location.replace(feedUrl);
     }
 });
 
 let element = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a");
 element.forEach(x => x.addEventListener('click', () => {
-    window.location.replace(feed);
+    window.location.replace(feedUrl);
 }), false);
 
 
 // ### Groups ###
 let group = document.querySelectorAll("[data-type='type_group'] > a");
-let group_pop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
+let groupPop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
 group.forEach(shc => shc.addEventListener('click', () => {
     shc = shc.getAttribute('href');
-    window.location.replace(groupSec(shc, group_pop[0]));
+    window.location.replace(groupSec(shc, groupPop[0]));
 }, false));
 
-if (current_url['href'].includes('groups') && ! current_url['href'].includes('permalink') && ! current_url['href'].includes('comment_id')) {
-    let split_url = current_url['href'].split('/');
-    
-    let group_ref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
+if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
+    let splitUrl = currentUrl['href'].split('/');
 
-    if (split_url[5] === '' || split_url[5] === null || split_url[5] === group_ref[0] || split_url[5] === group_ref[1] || split_url[5] === group_ref[2] || split_url[5] === group_ref[3] || split_url[5] === group_ref[4] || split_url[5] !== '?sorting_setting=' + group_pop[0]) {
-        let group_id = document.querySelectorAll("[property='al:android:url']");
-        window.location.replace(sortGroup(group_id, 'content', group_pop[0], current_url['origin'] + '/'));
+    let groupRef = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
+
+    if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupPop[0]) {
+        let groupId = document.querySelectorAll("[property='al:android:url']");
+        window.location.replace(sortGroup(groupId, 'content', groupPop[0], currentUrl['origin'] + '/'));
     }
 }
 
 // # Discussion link event #
-let group_disc = document.querySelectorAll('._2yau');
-if (group_disc[1] !== undefined) {
+let groupDisc = document.querySelectorAll('._2yau');
+if (groupDisc[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
     if (! abpg.includes('tab_about')) {
-        group_disc[1].addEventListener('click', () => { window.location.replace(sortGroup(group_id, 'content', group_pop[0], current_url['origin'] + '/')) }, false);
+        groupDisc[1].addEventListener('click', () => { window.location.replace(sortGroup(groupId, 'content', groupPop[0], currentUrl['origin'] + '/')) }, false);
     }
 }
 
