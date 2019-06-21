@@ -18,50 +18,48 @@
 
 // ### Global vars ###
 let current_url = new URL(window.location.href);
-let split_url = current_url['href'].split('/');
 
-// ### Feed vars ###
+// ### Feed ###
 let feed = current_url['origin'] + '?sk=h_chr';
-let element = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a");
-let group = document.querySelectorAll("[data-type='type_group'] > a");
-let idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 
-// ### Groups vars ###
-let group_id = document.querySelectorAll("[property='al:android:url']");
-let group_disc = document.querySelectorAll('._2yau');
-let group_pop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
-let group_ref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
-
-
-// ### For Feed ###
 if (current_url['href'] === current_url['origin'] + '/') {
     window.location.replace(feed);
 }
 
+let idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 idx.forEach(a => {
     if (current_url['search'].includes(a)) {
         window.location.replace(feed);
     }
 });
 
+let element = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a");
 element.forEach(x => x.addEventListener('click', () => {
     window.location.replace(feed);
 }), false);
 
 
-// ### For Groups ###
+// ### Groups ###
+let group = document.querySelectorAll("[data-type='type_group'] > a");
+let group_pop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
 group.forEach(shc => shc.addEventListener('click', () => {
     shc = shc.getAttribute('href');
     window.location.replace(groupSec(shc, group_pop[0]));
 }, false));
 
 if (current_url['href'].includes('groups') && ! current_url['href'].includes('permalink') && ! current_url['href'].includes('comment_id')) {
+    let split_url = current_url['href'].split('/');
+    
+    let group_ref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
+
     if (split_url[5] === '' || split_url[5] === null || split_url[5] === group_ref[0] || split_url[5] === group_ref[1] || split_url[5] === group_ref[2] || split_url[5] === group_ref[3] || split_url[5] === group_ref[4] || split_url[5] !== '?sorting_setting=' + group_pop[0]) {
+        let group_id = document.querySelectorAll("[property='al:android:url']");
         window.location.replace(sortGroup(group_id, 'content', group_pop[0], current_url['origin'] + '/'));
     }
 }
 
 // # Discussion link event #
+let group_disc = document.querySelectorAll('._2yau');
 if (group_disc[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
