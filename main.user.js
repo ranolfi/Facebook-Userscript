@@ -4,7 +4,7 @@
 // @author      Hélder Ferreira
 // @namespace   https://greasyfork.org/users/89591
 // @homepageURL https://greasyfork.org/en/scripts/382099-facebook-auto-most-recent-stories
-// @description Change Facebook and groups feed to "Most Recent
+// @description Change Facebook and groups feed to "Most Recent"
 // @compatible  chrome
 // @compatible  firefox
 // @compatible  opera
