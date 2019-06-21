@@ -89,8 +89,8 @@ comtime.forEach(x => x.addEventListener('click', () => { // TODO: should change 
 // # Arguments: a = element where group ID is located, b = atribute where group ID is, c = type of group disposition(CHRONOLOGICAL or RECENT_ACTIVITY), d = Facebook domain, rs = a resource variable #
 function getGroupUrlWithSortParameter(groupIdElement, groupIdAttributeName, sortBy, url,) {
     groupIdElement = groupIdElement[0].getAttribute(groupIdAttributeName);
-    let splitGroupUrl = groupIdElement.split('/');
-    return url + 'groups/' + splitGroupUrl[3] + '/?sorting_setting=' + sortBy;
+    let groupId = groupIdElement.split('/')[3];
+    return url + 'groups/' + groupId + '/?sorting_setting=' + sortBy;
 }
 
 // # Arguments: a = href attribute, b = type of group disposition (CHRONOLOGICAL or RECENT_ACTIVITY), rs = a resource variable #
