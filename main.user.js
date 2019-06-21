@@ -55,7 +55,7 @@ grp.forEach(shc => shc.addEventListener('click', () => {
 }, false));
 
 if (cur['href'].includes('groups') && !cur['href'].includes('permalink') && !cur['href'].includes('comment_id')) {
-    if (spurl[5] === '' || spurl[5] === null || spurl[5] === gref[0] || spurl[5] === gref[1] || spurl[5] === gref[2] || spurl[5]=== gref[3] || spurl[5] === gref[4] || spurl[5] !== '?sorting_setting=' + gpop[0]) {
+    if (spurl[5] === '' || spurl[5] === null || spurl[5] === gref[0] || spurl[5] === gref[1] || spurl[5] === gref[2] || spurl[5] === gref[3] || spurl[5] === gref[4] || spurl[5] !== '?sorting_setting=' + gpop[0]) {
         window.location.replace(sortGrp(grid, 'content', gpop[0], cur['origin'] + '/'));
     }
 }
