@@ -17,13 +17,19 @@
 // ==/UserScript==
 
 // ### Global vars ###
-var cur = new URL(window.location.href), spurl = cur['href'].split('/');
+let cur = new URL(window.location.href), spurl = cur['href'].split('/');
 
 // ### Feed vars ###
-fd = cur['origin'] + '?sk=h_chr', elm = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a"), grp = document.querySelectorAll("[data-type='type_group'] > a"),  idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
+let fd = cur['origin'] + '?sk=h_chr';
+let elm = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a");
+let grp = document.querySelectorAll("[data-type='type_group'] > a");
+let idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 
 // ### Groups vars ###
-grid = document.querySelectorAll("[property='al:android:url']"), gdisc = document.querySelectorAll('._2yau'), gpop =['CHRONOLOGICAL', 'RECENT_ACTIVITY'], gref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
+let grid = document.querySelectorAll("[property='al:android:url']");
+let gdisc = document.querySelectorAll('._2yau');
+let gpop =['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
+let gref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
 
 // ### For Feed ###
@@ -54,7 +60,7 @@ if(cur['href'].includes('groups') && !cur['href'].includes('permalink') && !cur[
 
 // # Discussion link event #
 if(gdisc[1] !== undefined){
-    var abpg = document.querySelectorAll('._2yaa');
+    let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
     if(!abpg.includes('tab_about')){
         gdisc[1].addEventListener('click', () => { window.location.replace(sortGrp(grid, 'content', gpop[0], cur['origin'] + '/') }, false);
@@ -62,13 +68,13 @@ if(gdisc[1] !== undefined){
 }
 
 // # 'post time' & 'comment time' link event #
-var postime = document.querySelectorAll('._5pcq');
+let postime = document.querySelectorAll('._5pcq');
 postime.forEach(ptm => ptm.addEventListener('click', () => {
     ptm = ptm.getAttribute('href');
     window.location.replace(ptm);
 }, false));
 
-var comtime = document.querySelectorAll('._6qw7');
+let comtime = document.querySelectorAll('._6qw7');
 comtime.forEach(cmt => cmt.addEventListener('click', () => {
     cmt = cmt.getAttribute('href');
     window.location.replace(cmt);
