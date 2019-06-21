@@ -17,56 +17,56 @@
 // ==/UserScript==
 
 // ### Global vars ###
-let cur = new URL(window.location.href);
-let spurl = cur['href'].split('/');
+let current_url = new URL(window.location.href);
+let split_url = current_url['href'].split('/');
 
 // ### Feed vars ###
-let fd = cur['origin'] + '?sk=h_chr';
-let elm = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a");
-let grp = document.querySelectorAll("[data-type='type_group'] > a");
+let feed = current_url['origin'] + '?sk=h_chr';
+let element = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a");
+let group = document.querySelectorAll("[data-type='type_group'] > a");
 let idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 
 // ### Groups vars ###
-let grid = document.querySelectorAll("[property='al:android:url']");
-let gdisc = document.querySelectorAll('._2yau');
-let gpop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
-let gref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
+let group_id = document.querySelectorAll("[property='al:android:url']");
+let group_disc = document.querySelectorAll('._2yau');
+let group_pop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
+let group_ref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
 
 // ### For Feed ###
-if (cur['href'] === cur['origin'] + '/') {
-    window.location.replace(fd);
+if (current_url['href'] === current_url['origin'] + '/') {
+    window.location.replace(feed);
 }
 
 idx.forEach((a) => {
-    if (cur['search'].includes(a)) {
-        window.location.replace(fd);
+    if (current_url['search'].includes(a)) {
+        window.location.replace(feed);
     }
 });
 
-elm.forEach(elm => elm.addEventListener('click', () => {
-    window.location.replace(fd);
+element.forEach(element => element.addEventListener('click', () => { // possible mistake
+    window.location.replace(feed);
 }), false);
 
 
 // ### For Groups ###
-grp.forEach(shc => shc.addEventListener('click', () => {
+group.forEach(shc => shc.addEventListener('click', () => {
     shc = shc.getAttribute('href');
-    window.location.replace(groupSec(shc, gpop[0]));
+    window.location.replace(groupSec(shc, group_pop[0]));
 }, false));
 
-if (cur['href'].includes('groups') && ! cur['href'].includes('permalink') && ! cur['href'].includes('comment_id')) {
-    if (spurl[5] === '' || spurl[5] === null || spurl[5] === gref[0] || spurl[5] === gref[1] || spurl[5] === gref[2] || spurl[5] === gref[3] || spurl[5] === gref[4] || spurl[5] !== '?sorting_setting=' + gpop[0]) {
-        window.location.replace(sortGrp(grid, 'content', gpop[0], cur['origin'] + '/'));
+if (current_url['href'].includes('groups') && ! current_url['href'].includes('permalink') && ! current_url['href'].includes('comment_id')) {
+    if (split_url[5] === '' || split_url[5] === null || split_url[5] === group_ref[0] || split_url[5] === group_ref[1] || split_url[5] === group_ref[2] || split_url[5] === group_ref[3] || split_url[5] === group_ref[4] || split_url[5] !== '?sorting_setting=' + group_pop[0]) {
+        window.location.replace(sortGroup(group_id, 'content', group_pop[0], current_url['origin'] + '/'));
     }
 }
 
 // # Discussion link event #
-if (gdisc[1] !== undefined) {
+if (group_disc[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
     if (! abpg.includes('tab_about')) {
-        gdisc[1].addEventListener('click', () => { window.location.replace(sortGrp(grid, 'content', gpop[0], cur['origin'] + '/')) }, false);
+        group_disc[1].addEventListener('click', () => { window.location.replace(sortGroup(group_id, 'content', group_pop[0], current_url['origin'] + '/')) }, false);
     }
 }
 
@@ -86,7 +86,7 @@ comtime.forEach(cmt => cmt.addEventListener('click', () => {
 
 // ### Required functions ###
 // # Arguments: a = element where group ID is located, b = atribute where group ID is, c = type of group disposition(CHRONOLOGICAL or RECENT_ACTIVITY), d = Facebook domain, rs = a resource variable #
-function sortGrp(a, b, c, d, rs) {
+function sortGroup(a, b, c, d, rs) {
     a = a[0].getAttribute(b);
     rs = a.split('/');
     return d + 'groups/' + rs[3] + '/?sorting_setting=' + c;
