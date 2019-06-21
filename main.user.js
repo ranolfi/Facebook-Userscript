@@ -36,11 +36,13 @@ let gref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?
 if (cur['href'] === cur['origin'] + '/') {
     window.location.replace(fd);
 }
+
 idx.forEach((a) => {
     if (cur['search'].includes(a)) {
         window.location.replace(fd);
     }
 });
+
 elm.forEach(elm => elm.addEventListener('click', () => {
     window.location.replace(fd);
 }), false);
