@@ -27,8 +27,8 @@ if (currentUrl['href'] === currentUrl['origin'] + '/') {
 }
 
 let idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
-idx.forEach(a => {
-    if (currentUrl['search'].includes(a)) {
+idx.forEach(x => {
+    if (currentUrl['search'].includes(x)) {
         window.location.replace(feedUrl);
     }
 });
@@ -42,9 +42,9 @@ element.forEach(x => x.addEventListener('click', () => {
 // ### Groups ###
 let group = document.querySelectorAll("[data-type='type_group'] > a");
 let groupPop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
-group.forEach(shc => shc.addEventListener('click', () => {
-    shc = shc.getAttribute('href');
-    window.location.replace(groupSec(shc, groupPop[0]));
+group.forEach(x => x.addEventListener('click', () => {
+    x = x.getAttribute('href');
+    window.location.replace(groupSec(x, groupPop[0]));
 }, false));
 
 if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
@@ -70,15 +70,15 @@ if (groupDisc[1] !== undefined) {
 
 // # 'post time' & 'comment time' link event #
 let postime = document.querySelectorAll('._5pcq');
-postime.forEach(ptm => ptm.addEventListener('click', () => {
-    ptm = ptm.getAttribute('href');
-    window.location.replace(ptm);
+postime.forEach(x => x.addEventListener('click', () => {
+    x = x.getAttribute('href');
+    window.location.replace(x);
 }, false));
 
 let comtime = document.querySelectorAll('._6qw7');
-comtime.forEach(cmt => cmt.addEventListener('click', () => {
-    cmt = cmt.getAttribute('href');
-    window.location.replace(cmt);
+comtime.forEach(x => x.addEventListener('click', () => {
+    x = x.getAttribute('href');
+    window.location.replace(x);
 }, false));
 
 
