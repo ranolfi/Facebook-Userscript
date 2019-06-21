@@ -66,8 +66,9 @@ if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('perm
 let groupDiscussionLinks = document.querySelectorAll('._2yau'); // fragile (hardcoded obfuscated identifiers may not work in the future)
 if (groupDiscussionLinks[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa'); // fragile (hardcoded obfuscated identifiers may not work in the future)
-    abpg = abpg[1].getAttribute('data-key'); // TODO: don't do this; also, find a more suitable name (WTH does 'abpg' mean?)
-    if (! abpg.includes('tab_about')) {
+                                                    // TODO: find a more suitable name (WTH does 'abpg' mean?)
+    let abpgDataKey = abpg[1].getAttribute('data-key');
+    if (! abpgDataKey.includes('tab_about')) {
         groupDiscussionLinks[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl['origin'] + '/')) }, false); // TODO: should change the href instead
     }
 }
@@ -75,15 +76,15 @@ if (groupDiscussionLinks[1] !== undefined) {
 // # 'post time' link #
 let postTimestampElement = document.querySelectorAll('._5pcq');
 postTimestampElement.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
-    x = x.getAttribute('href'); // TODO: don't do this
-    window.location.replace(x);
+    let url = x.getAttribute('href');
+    window.location.replace(url);
 }, false));
 
 // # 'comment time' link #
 let commentTimestampElement = document.querySelectorAll('._6qw7');
 commentTimestampElement.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
-    x = x.getAttribute('href'); // TODO: don't do this
-    window.location.replace(x);
+    let url = x.getAttribute('href');
+    window.location.replace(url);
 }, false));
 
 
