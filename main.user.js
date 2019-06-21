@@ -46,8 +46,8 @@ let groupSortOptions = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
 // TODO: groupSortBy
 
 groupLinks.forEach(x => x.addEventListener('click', () => {
-    x = x.getAttribute('href'); // TODO
-    window.location.replace(groupSec(x, groupSortOptions[0]));
+    let groupUrl = x.getAttribute('href');
+    window.location.replace(groupSec(groupUrl, groupSortOptions[0]));
 }, false));
 
 if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
