@@ -44,7 +44,7 @@ homepageLinks.forEach(x => x.addEventListener('click', () => { // TODO: should c
 let groupLinks = document.querySelectorAll("[data-type='type_group'] > a");
 
 let groupSortOptions = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
-let groupSortBy = groupSortOptions[0]; // TODO: update README to change this line if needed
+let groupSortBy = groupSortOptions[0];
 
 groupLinks.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
     let groupUrl = x.getAttribute('href');

@@ -17,4 +17,4 @@ If you know how to solve the problem and want to contribute, please open a Pull 
 
 ## Group feed: ## 
 If you want to see **New Activity** instead of **Recent Posts**, you need to change that in the script.   
-To do so, you need to change the `gpop[*]` index from `gpop[0]` to `gpop[1]` everywhere this variable is used.
+To do so, you need to change the line `let groupSortBy = groupSortOptions[0]` and replace the index `0` with `1`.
