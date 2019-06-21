@@ -14,6 +14,7 @@
 // @icon        https://en.facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png
 // @match       https://*.facebook.com/*
 // @grant       none
+// @run-at document-end
 // ==/UserScript==
 
 // ### Global vars ###
