@@ -44,7 +44,7 @@ idx.forEach(a => {
     }
 });
 
-element.forEach(element => element.addEventListener('click', () => { // possible mistake
+element.forEach(x => x.addEventListener('click', () => {
     window.location.replace(feed);
 }), false);
 
