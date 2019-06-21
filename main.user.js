@@ -56,8 +56,8 @@ if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('perm
     let groupRef = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
     if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupSortBy) {
-        let groupId = document.querySelectorAll("[property='al:android:url']");
-        window.location.replace(sortGroup(groupId, 'content', groupSortBy, currentUrl['origin'] + '/'));
+        let groupId = document.querySelectorAll("[property='al:android:url']"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
+        window.location.replace(getGroupUrlWithSortParameter(groupId, 'content', groupSortBy, currentUrl['origin'] + '/'));
     }
 }
 
@@ -67,7 +67,7 @@ if (groupDisc[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
     if (! abpg.includes('tab_about')) {
-        groupDisc[1].addEventListener('click', () => { window.location.replace(sortGroup(groupId, 'content', groupSortBy, currentUrl['origin'] + '/')) }, false); // TODO: should change the href instead
+        groupDisc[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupId, 'content', groupSortBy, currentUrl['origin'] + '/')) }, false); // TODO: should change the href instead
     }
 }
 
@@ -87,10 +87,10 @@ comtime.forEach(x => x.addEventListener('click', () => { // TODO: should change 
 
 // ### Required functions ###
 // # Arguments: a = element where group ID is located, b = atribute where group ID is, c = type of group disposition(CHRONOLOGICAL or RECENT_ACTIVITY), d = Facebook domain, rs = a resource variable #
-function sortGroup(a, b, c, d, rs) {
-    a = a[0].getAttribute(b);
-    rs = a.split('/');
-    return d + 'groups/' + rs[3] + '/?sorting_setting=' + c;
+function getGroupUrlWithSortParameter(groupIdElement, groupdIdAttributeName, sortBy, url, resource) { // TODO: 'resource' is not in function call - remove it?
+    groupIdElement = groupIdElement[0].getAttribute(groupdIdAttributeName);
+    resource = groupIdElement.split('/');
+    return url + 'groups/' + resource[3] + '/?sorting_setting=' + sortBy;
 }
 
 // # Arguments: a = href attribute, b = type of group disposition (CHRONOLOGICAL or RECENT_ACTIVITY), rs = a resource variable #
