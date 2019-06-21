@@ -38,7 +38,7 @@ if (current_url['href'] === current_url['origin'] + '/') {
     window.location.replace(feed);
 }
 
-idx.forEach((a) => {
+idx.forEach(a => {
     if (current_url['search'].includes(a)) {
         window.location.replace(feed);
     }
