@@ -28,16 +28,16 @@ let idx = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 // ### Groups vars ###
 let grid = document.querySelectorAll("[property='al:android:url']");
 let gdisc = document.querySelectorAll('._2yau');
-let gpop =['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
+let gpop = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
 let gref = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
 
 // ### For Feed ###
-if(cur['href'] === cur['origin'] + '/'){
+if (cur['href'] === cur['origin'] + '/') {
     window.location.replace(fd);
 }
 idx.forEach((a) => {
-    if(cur['search'].includes(a)){
+    if (cur['search'].includes(a)) {
         window.location.replace(fd);
     }
 });
@@ -52,17 +52,17 @@ grp.forEach(shc => shc.addEventListener('click', () => {
     window.location.replace(groupSec(shc, gpop[0]));
 }, false));
 
-if(cur['href'].includes('groups') && !cur['href'].includes('permalink') && !cur['href'].includes('comment_id')){
-    if(spurl[5] === '' || spurl[5] === null || spurl[5] === gref[0] || spurl[5] === gref[1] || spurl[5] === gref[2] || spurl[5]=== gref[3] || spurl[5] === gref[4] || spurl[5] !== '?sorting_setting=' + gpop[0]){
+if (cur['href'].includes('groups') && !cur['href'].includes('permalink') && !cur['href'].includes('comment_id')) {
+    if (spurl[5] === '' || spurl[5] === null || spurl[5] === gref[0] || spurl[5] === gref[1] || spurl[5] === gref[2] || spurl[5]=== gref[3] || spurl[5] === gref[4] || spurl[5] !== '?sorting_setting=' + gpop[0]) {
         window.location.replace(sortGrp(grid, 'content', gpop[0], cur['origin'] + '/'));
     }
 }
 
 // # Discussion link event #
-if(gdisc[1] !== undefined){
+if (gdisc[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
-    if(!abpg.includes('tab_about')){
+    if (!abpg.includes('tab_about')) {
         gdisc[1].addEventListener('click', () => { window.location.replace(sortGrp(grid, 'content', gpop[0], cur['origin'] + '/') }, false);
     }
 }
@@ -83,14 +83,14 @@ comtime.forEach(cmt => cmt.addEventListener('click', () => {
 
 // ### Required functions ###
 // # Arguments: a = element where group ID is located, b = atribute where group ID is, c = type of group disposition(CHRONOLOGICAL or RECENT_ACTIVITY), d = Facebook domain, rs = a resource variable #
-function sortGrp(a, b, c, d, rs){
+function sortGrp(a, b, c, d, rs) {
     a = a[0].getAttribute(b);
     rs = a.split('/');
     return d + 'groups/' + rs[3] + '/?sorting_setting=' + c;
 }
 
 // # Arguments: a = href attribute, b = type of group disposition (CHRONOLOGICAL or RECENT_ACTIVITY), rs = a resource variable #
-function groupSec(a, b, rs){
+function groupSec(a, b, rs) {
     rs = a.toString().replace(/(.?)ref=bookmarks/gi, "");
     return rs + "?sorting_setting=" + b;
 };
