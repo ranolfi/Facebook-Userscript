@@ -34,7 +34,7 @@ feedOptions.forEach(x => {
 });
 
 let homeLinks = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a"); // hardcoded identifiers may not work in the future
-homeLinks.forEach(x => x.addEventListener('click', () => {
+homeLinks.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
     window.location.replace(feedUrl);
 }), false);
 
@@ -43,11 +43,11 @@ homeLinks.forEach(x => x.addEventListener('click', () => {
 let groupLinks = document.querySelectorAll("[data-type='type_group'] > a");
 
 let groupSortOptions = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
-// TODO: groupSortBy
+let groupSortBy = groupSortOptions[0]; // TODO: update documentation to change here
 
-groupLinks.forEach(x => x.addEventListener('click', () => {
+groupLinks.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
     let groupUrl = x.getAttribute('href');
-    window.location.replace(groupSec(groupUrl, groupSortOptions[0]));
+    window.location.replace(groupSec(groupUrl, groupSortBy));
 }, false));
 
 if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
@@ -55,9 +55,9 @@ if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('perm
 
     let groupRef = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
-    if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupSortOptions[0]) {
+    if (splitUrl[5] === '' || splitUrl[5] === null || splitUrl[5] === groupRef[0] || splitUrl[5] === groupRef[1] || splitUrl[5] === groupRef[2] || splitUrl[5] === groupRef[3] || splitUrl[5] === groupRef[4] || splitUrl[5] !== '?sorting_setting=' + groupSortBy) {
         let groupId = document.querySelectorAll("[property='al:android:url']");
-        window.location.replace(sortGroup(groupId, 'content', groupSortOptions[0], currentUrl['origin'] + '/'));
+        window.location.replace(sortGroup(groupId, 'content', groupSortBy, currentUrl['origin'] + '/'));
     }
 }
 
@@ -67,19 +67,19 @@ if (groupDisc[1] !== undefined) {
     let abpg = document.querySelectorAll('._2yaa');
     abpg = abpg[1].getAttribute('data-key');
     if (! abpg.includes('tab_about')) {
-        groupDisc[1].addEventListener('click', () => { window.location.replace(sortGroup(groupId, 'content', groupSortOptions[0], currentUrl['origin'] + '/')) }, false);
+        groupDisc[1].addEventListener('click', () => { window.location.replace(sortGroup(groupId, 'content', groupSortBy, currentUrl['origin'] + '/')) }, false); // TODO: should change the href instead
     }
 }
 
 // # 'post time' & 'comment time' link event #
 let postime = document.querySelectorAll('._5pcq');
-postime.forEach(x => x.addEventListener('click', () => {
+postime.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
     x = x.getAttribute('href');
     window.location.replace(x);
 }, false));
 
 let comtime = document.querySelectorAll('._6qw7');
-comtime.forEach(x => x.addEventListener('click', () => {
+comtime.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
     x = x.getAttribute('href');
     window.location.replace(x);
 }, false));
