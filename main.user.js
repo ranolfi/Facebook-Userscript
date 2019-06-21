@@ -56,9 +56,9 @@ if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('perm
     let splitUrl = currentUrl['href'].split('/');
     let urlArg = splitUrl[5];
 
-    let groupRef = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
+    let groupRefs = ['?ref=group_header', '?ref=bookmarks', '?ref=direct', '?fref=nf', '?ref=nf_targetfref=nf'];
 
-    if (urlArg === '' || urlArg === null || urlArg === groupRef[0] || urlArg === groupRef[1] || urlArg === groupRef[2] || urlArg === groupRef[3] || urlArg === groupRef[4] || urlArg !== '?sorting_setting=' + groupSortBy) {
+    if (urlArg === '' || urlArg === null || urlArg === groupRefs[0] || urlArg === groupRefs[1] || urlArg === groupRefs[2] || urlArg === groupRefs[3] || urlArg === groupRefs[4] || urlArg !== '?sorting_setting=' + groupSortBy) {
         window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl['origin'] + '/'));
     }
 }
