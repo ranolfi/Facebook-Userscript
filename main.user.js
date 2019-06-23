@@ -25,8 +25,8 @@ let baseUrl = currentUrl['origin'];
 let mostRecentFeedUrl = baseUrl + '?sk=h_chr';
 let feedOptions = ['?ref=logo', '?sk=nf', '?ref=tn_tnmn'];
 
-if (currentUrl['href'] === baseUrl + '/'
-    || feedOptions.includes(currentUrl['search'])) {
+if (currentUrl.href === baseUrl + '/'
+    || feedOptions.includes(currentUrl.search)) {
     window.location.replace(mostRecentFeedUrl);
 }
 
@@ -49,8 +49,8 @@ groupLinks.forEach(x => {
 
 let groupIdElement = document.querySelectorAll("[property='al:android:url']"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
 
-if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
-    let splitUrl = currentUrl['href'].split('/');
+if (currentUrl.href.includes('groups') && ! currentUrl.href.includes('permalink') && ! currentUrl.href.includes('comment_id')) {
+    let splitUrl = currentUrl.href.split('/');
     let urlArg = splitUrl[5];
 
     if (urlArg !== '?sorting_setting=' + groupSortBy) { // TODO: allow manual override
