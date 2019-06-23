@@ -19,12 +19,13 @@
 
 // ### Global vars ###
 let currentUrl = new URL(window.location.href);
+let baseUrl = currentUrl.origin;
 
 // ### Feed ###
-let mostRecentFeedUrl = currentUrl.origin + '?sk=h_chr';
+let mostRecentFeedUrl = baseUrl + '?sk=h_chr';
 let feedOptions = ['?sk=h_nor', '?ref=logo', '?sk=nf', '?ref=tn_tnmn'];
 
-if (currentUrl.href === currentUrl.origin + '/'
+if (currentUrl.href === baseUrl + '/'
     || feedOptions.includes(currentUrl.search)) {
     window.location.replace(mostRecentFeedUrl); // TODO: allow manual override
 }
@@ -48,7 +49,7 @@ if (currentUrl.href.includes('groups') && ! currentUrl.href.includes('permalink'
     let urlArg = splitUrl[5];
 
     if (urlArg !== '?sorting_setting=' + groupSortBy) { // TODO: allow manual override
-        window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl.origin + '/'));
+        window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, baseUrl + '/'));
     }
 }
 
@@ -59,7 +60,7 @@ if (groupDiscussionLinks[1] !== undefined) {
                                                     // TODO: find a more suitable name (WTH does 'abpg' mean?)
     let abpgDataKey = abpg[1].getAttribute('data-key');
     if (! abpgDataKey.includes('tab_about')) {
-        groupDiscussionLinks[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl.origin + '/')) }, false); // TODO: should change the href instead
+        groupDiscussionLinks[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, baseUrl + '/')) }, false); // TODO: should change the href instead
     }
 }
 
