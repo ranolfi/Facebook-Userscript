@@ -22,11 +22,11 @@ let currentUrl = new URL(window.location.href);
 
 // ### Feed ###
 let mostRecentFeedUrl = currentUrl['origin'] + '?sk=h_chr';
-let feedOptions = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
+let feedOptions = ['?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 
 if (currentUrl['href'] === currentUrl['origin'] + '/'
     || feedOptions.includes(currentUrl['search'])) {
-    window.location.replace(mostRecentFeedUrl); // TODO: allow manual override
+    window.location.replace(mostRecentFeedUrl);
 }
 
 
