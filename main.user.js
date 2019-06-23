@@ -21,11 +21,11 @@
 let currentUrl = new URL(window.location.href);
 
 // ### Feed ###
-let mostRecentFeedUrl = currentUrl['origin'] + '?sk=h_chr';
+let mostRecentFeedUrl = currentUrl.origin + '?sk=h_chr';
 let feedOptions = ['?sk=h_nor', '?ref=logo', '?sk=nf', '?ref=tn_tnmn'];
 
-if (currentUrl['href'] === currentUrl['origin'] + '/'
-    || feedOptions.includes(currentUrl['search'])) {
+if (currentUrl.href === currentUrl.origin + '/'
+    || feedOptions.includes(currentUrl.search)) {
     window.location.replace(mostRecentFeedUrl); // TODO: allow manual override
 }
 
@@ -43,12 +43,12 @@ groupLinks.forEach(x => x.addEventListener('click', () => { // TODO: should chan
 
 let groupIdElement = document.querySelectorAll("[property='al:android:url']"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
 
-if (currentUrl['href'].includes('groups') && ! currentUrl['href'].includes('permalink') && ! currentUrl['href'].includes('comment_id')) {
-    let splitUrl = currentUrl['href'].split('/');
+if (currentUrl.href.includes('groups') && ! currentUrl.href.includes('permalink') && ! currentUrl.href.includes('comment_id')) {
+    let splitUrl = currentUrl.href.split('/');
     let urlArg = splitUrl[5];
 
     if (urlArg !== '?sorting_setting=' + groupSortBy) { // TODO: allow manual override
-        window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl['origin'] + '/'));
+        window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl.origin + '/'));
     }
 }
 
@@ -59,7 +59,7 @@ if (groupDiscussionLinks[1] !== undefined) {
                                                     // TODO: find a more suitable name (WTH does 'abpg' mean?)
     let abpgDataKey = abpg[1].getAttribute('data-key');
     if (! abpgDataKey.includes('tab_about')) {
-        groupDiscussionLinks[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl['origin'] + '/')) }, false); // TODO: should change the href instead
+        groupDiscussionLinks[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, currentUrl.origin + '/')) }, false); // TODO: should change the href instead
     }
 }
 
