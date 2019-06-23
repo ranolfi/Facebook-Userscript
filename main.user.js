@@ -19,7 +19,7 @@
 
 // ### Global vars ###
 let currentUrl = new URL(window.location.href);
-let baseUrl = currentUrl['origin'];
+let baseUrl = currentUrl.origin;
 
 // ### Feed ###
 let mostRecentFeedUrl = baseUrl + '?sk=h_chr';
