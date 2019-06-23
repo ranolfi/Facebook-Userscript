@@ -34,11 +34,6 @@ feedOptions.forEach(x => {
     }
 });
 
-let homepageLinks = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a"); // fragile (hardcoded obfuscated identifiers may not work in the future)
-homepageLinks.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
-    window.location.replace(mostRecentFeedUrl);
-}), false);
-
 
 // ### Groups ###
 let groupLinks = document.querySelectorAll("[data-type='type_group'] > a");
