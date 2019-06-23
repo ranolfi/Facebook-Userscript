@@ -22,17 +22,12 @@ let currentUrl = new URL(window.location.href);
 
 // ### Feed ###
 let mostRecentFeedUrl = currentUrl['origin'] + '?sk=h_chr';
-
-if (currentUrl['href'] === currentUrl['origin'] + '/') {
-    window.location.replace(mostRecentFeedUrl);
-}
-
 let feedOptions = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
-feedOptions.forEach(x => {
-    if (currentUrl['search'].includes(x)) { // TODO: allow manual override
-        window.location.replace(mostRecentFeedUrl);
-    }
-});
+
+if (currentUrl['href'] === currentUrl['origin'] + '/'
+    || feedOptions.includes(currentUrl['search'])) {
+    window.location.replace(mostRecentFeedUrl); // TODO: allow manual override
+}
 
 
 // ### Groups ###
