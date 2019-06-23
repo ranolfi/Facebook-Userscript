@@ -24,12 +24,12 @@ let currentUrl = new URL(window.location.href);
 let feedUrl = currentUrl['origin'] + '?sk=h_chr';
 
 if (currentUrl['href'] === currentUrl['origin'] + '/') {
-    window.location.replace(feedUrl); // TODO: allow manual override
+    window.location.replace(feedUrl);
 }
 
 let feedOptions = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 feedOptions.forEach(x => {
-    if (currentUrl['search'].includes(x)) {
+    if (currentUrl['search'].includes(x)) { // TODO: allow manual override
         window.location.replace(feedUrl);
     }
 });
