@@ -22,64 +22,64 @@ let currentUrl = new URL(window.location.href);
 let baseUrl = currentUrl.origin;
 
 // ### Feed ###
-let mostRecentFeedUrl = baseUrl + '?sk=h_chr';
-let feedOptions = ['?ref=logo', '?sk=nf', '?ref=tn_tnmn'];
+let mostRecentFeedUrl = baseUrl + "?sk=h_chr";
+let feedOptions = ["?ref=logo", "?sk=nf", "?ref=tn_tnmn"];
 
-if (currentUrl.href === baseUrl + '/'
+if (currentUrl.href === baseUrl + "/"
     || feedOptions.includes(currentUrl.search)) {
     window.location.replace(mostRecentFeedUrl);
 }
 
 
 // ### Groups ###
-let groupLinks = document.querySelectorAll("[data-type='type_group'] > a");
+let groupLinks = document.querySelectorAll("[data-type=\"type_group\"] > a");
 
-let groupSortOptions = ['CHRONOLOGICAL', 'RECENT_ACTIVITY'];
+let groupSortOptions = ["CHRONOLOGICAL", "RECENT_ACTIVITY"];
 let groupSortBy = groupSortOptions[0];
 
 groupLinks.forEach(x => {
-    let groupUrl = new URL(x.getAttribute('href'), baseUrl);
+    let groupUrl = new URL(x.getAttribute("href"), baseUrl);
     
-    groupUrl.searchParams.set('sorting_setting', 'CHRONOLOGICAL');
+    groupUrl.searchParams.set("sorting_setting", "CHRONOLOGICAL");
 
     let mostRecentGroupUrl = groupUrl.href.replace(groupUrl.origin, "");
 
-    x.setAttribute('href', mostRecentGroupUrl);
+    x.setAttribute("href", mostRecentGroupUrl);
 });
 
-let groupIdElement = document.querySelectorAll("[property='al:android:url']"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
+let groupIdElement = document.querySelectorAll("[property=\"al:android:url\"]"); // TODO: no need; 'sorting_setting' also works with default group url (group name)
 
-if (currentUrl.href.includes('groups') && ! currentUrl.href.includes('permalink') && ! currentUrl.href.includes('comment_id')) {
-    let splitUrl = currentUrl.href.split('/');
+if (currentUrl.href.includes("groups") && ! currentUrl.href.includes("permalink") && ! currentUrl.href.includes("comment_id")) {
+    let splitUrl = currentUrl.href.split("/");
     let urlArg = splitUrl[5];
 
-    if (urlArg !== '?sorting_setting=' + groupSortBy) { // TODO: allow manual override
-        window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, baseUrl + '/'));
+    if (urlArg !== "?sorting_setting=" + groupSortBy) { // TODO: allow manual override
+        window.location.replace(getGroupUrlWithSortParameter(groupIdElement, "content", groupSortBy, baseUrl + "/"));
     }
 }
 
 // # Discussion link #
-let groupDiscussionLinks = document.querySelectorAll('._2yau'); // fragile (hardcoded obfuscated identifiers may not work in the future)
+let groupDiscussionLinks = document.querySelectorAll("._2yau"); // fragile (hardcoded obfuscated identifiers may not work in the future)
 if (groupDiscussionLinks[1] !== undefined) {
-    let abpg = document.querySelectorAll('._2yaa'); // fragile (hardcoded obfuscated identifiers may not work in the future)
+    let abpg = document.querySelectorAll("._2yaa"); // fragile (hardcoded obfuscated identifiers may not work in the future)
                                                     // TODO: find a more suitable name (WTH does 'abpg' mean?)
-    let abpgDataKey = abpg[1].getAttribute('data-key');
-    if (! abpgDataKey.includes('tab_about')) {
-        groupDiscussionLinks[1].addEventListener('click', () => { window.location.replace(getGroupUrlWithSortParameter(groupIdElement, 'content', groupSortBy, baseUrl + '/')) }, false); // TODO: should change the href instead
+    let abpgDataKey = abpg[1].getAttribute("data-key");
+    if (! abpgDataKey.includes("tab_about")) {
+        groupDiscussionLinks[1].addEventListener("click", () => { window.location.replace(getGroupUrlWithSortParameter(groupIdElement, "content", groupSortBy, baseUrl + "/")) }, false); // TODO: should change the href instead
     }
 }
 
 // # 'post time' link #
-let postTimestampElement = document.querySelectorAll('._5pcq');
-postTimestampElement.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
-    let url = x.getAttribute('href');
+let postTimestampElement = document.querySelectorAll("._5pcq");
+postTimestampElement.forEach(x => x.addEventListener("click", () => { // TODO: should change the href instead
+    let url = x.getAttribute("href");
     window.location.replace(url);
 }, false));
 
 // # 'comment time' link #
-let commentTimestampElement = document.querySelectorAll('._6qw7');
-commentTimestampElement.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
-    let url = x.getAttribute('href');
+let commentTimestampElement = document.querySelectorAll("._6qw7");
+commentTimestampElement.forEach(x => x.addEventListener("click", () => { // TODO: should change the href instead
+    let url = x.getAttribute("href");
     window.location.replace(url);
 }, false));
 
@@ -92,8 +92,8 @@ commentTimestampElement.forEach(x => x.addEventListener('click', () => { // TODO
 // - url = Facebook domain
 function getGroupUrlWithSortParameter(groupIdElement, groupIdAttributeName, sortBy, url) {
     let groupIdElementAttributeValue = groupIdElement[0].getAttribute(groupIdAttributeName); // TODO: why is this done here? (shouldn't)
-    let groupId = groupIdElementAttributeValue.split('/')[3];
-    return url + 'groups/' + groupId + '/?sorting_setting=' + sortBy;
+    let groupId = groupIdElementAttributeValue.split("/")[3];
+    return url + "groups/" + groupId + "/?sorting_setting=" + sortBy;
 }
 
 // # Arguments: a = href attribute, b = type of group disposition (CHRONOLOGICAL or RECENT_ACTIVITY), rs = a resource variable #
