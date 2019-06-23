@@ -21,22 +21,22 @@
 let currentUrl = new URL(window.location.href);
 
 // ### Feed ###
-let feedUrl = currentUrl['origin'] + '?sk=h_chr';
+let mostRecentFeedUrl = currentUrl['origin'] + '?sk=h_chr';
 
 if (currentUrl['href'] === currentUrl['origin'] + '/') {
-    window.location.replace(feedUrl);
+    window.location.replace(mostRecentFeedUrl);
 }
 
 let feedOptions = ['?sk=h_nor', '?ref=logo', 'sk=nf', '?ref=tn_tnmn'];
 feedOptions.forEach(x => {
     if (currentUrl['search'].includes(x)) { // TODO: allow manual override
-        window.location.replace(feedUrl);
+        window.location.replace(mostRecentFeedUrl);
     }
 });
 
 let homepageLinks = document.querySelectorAll("[data-click='bluebar_logo'] > a, ._3qcu > a#navItem_4748854339 > a"); // fragile (hardcoded obfuscated identifiers may not work in the future)
 homepageLinks.forEach(x => x.addEventListener('click', () => { // TODO: should change the href instead
-    window.location.replace(feedUrl);
+    window.location.replace(mostRecentFeedUrl);
 }), false);
 
 
